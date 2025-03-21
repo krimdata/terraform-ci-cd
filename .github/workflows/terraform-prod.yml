@@ -1,0 +1,40 @@
+name: Terraform CI/CD - Production
+
+on:
+  workflow_dispatch:  # Déclenchement manuel
+
+jobs:
+  terraform-prod:
+    runs-on: ubuntu-latest
+    environment:
+      name: production  # Configurez l'environnement "production" dans GitHub pour nécessiter une approbation
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.5.0'
+
+      - name: Terraform Init
+        working-directory: ./environments/prod
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./environments/prod
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ./environments/prod
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ./environments/prod
+        run: terraform apply -auto-approve tfplan
