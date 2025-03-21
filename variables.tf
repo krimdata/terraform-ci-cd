@@ -1,19 +1,20 @@
 variable "resource_group_name" {
-  description = "Nom du groupe de ressources (défini par l'environnement)"
-  type        = string
+  description = "Nom du Resource Group"
+  default     = "my-webapp-rg"
 }
 
 variable "location" {
-  description = "Région de déploiement (défini par l'environnement)"
-  type        = string
+  description = "Région Azure de déploiement"
+  default     = "France Central"
 }
 
 variable "app_service_plan_name" {
   description = "Nom du service plan pour l'App Service"
-  type        = string
+  default     = "my-free-appservice-plan"
 }
 
 variable "webapp_name" {
   description = "Nom de l'Azure Web App"
-  type        = string
+  default     = "my-free-webapp"
 }
+
