@@ -26,12 +26,3 @@ resource "azurerm_linux_web_app" "webapp" {
   }
 }
 
-output "webapp_url" {
-  description = "URL de la Web App déployée"
-  value       = azurerm_linux_web_app.webapp.default_hostname
-}
-
-output "webapp_url" {
-  description = "URL par défaut de la Web App"
-  value       = azurerm_linux_web_app.webapp.default_hostname
-}
