@@ -15,6 +15,6 @@ variable "app_service_plan_name" {
 
 variable "webapp_name" {
   description = "Nom de l'Azure Web App"
-  default     = "my-neweeeee-free-webapp"
+  default     = "my-neweeee-free-webapp"
 }
 
